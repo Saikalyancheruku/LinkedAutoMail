@@ -136,7 +136,7 @@ app.get('/confirm', async (req, res) => {
 //     scrapeAndSendConfirmation();
 // });
 // Schedule the scraper to run every day at 7:30 PM
-schedule.scheduleJob('17 20 * * *', () => {
+schedule.scheduleJob('25 20 * * *', () => {
     // console.log('Running scheduled scraping job at 7:30 PM...');
     // scrapeLinkedIn('your-linkedin-email@example.com', 'your-linkedin-password');
     scrapeAndSendConfirmation();
