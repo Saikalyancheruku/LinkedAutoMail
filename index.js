@@ -59,7 +59,7 @@ async function scrapeAndSendConfirmation() {
         const emails = [];
         let previousHeight = 0;
         const startTime = Date.now();
-        const duration = 10 * 60 * 1000; // 10 minutes in milliseconds
+        const duration = 20 * 60 * 1000; // 10 minutes in milliseconds
 
         // Scroll for 10 minutes
         while (Date.now() - startTime < duration) {
@@ -85,7 +85,7 @@ async function scrapeAndSendConfirmation() {
             previousHeight = currentHeight;
 
             await page.evaluate(() => window.scrollBy(0, 1000)); // Scroll down 1000px
-            await page.waitForTimeout(5000); // Wait 5 seconds for new content to load
+            await page.waitForTimeout(10000); // Wait 5 seconds for new content to load
         }
 
         // Remove duplicates
@@ -100,7 +100,7 @@ async function scrapeAndSendConfirmation() {
             subject: 'Confirmation: Approve Email Sending',
             text: `We have collected the following emails:\n\n${scrapedEmails.join(
                 '\n'
-            )}\n\nClick the link below to approve sending these emails:\nhttp://localhost:${port}/confirm`,
+            )}\n\nClick the link below to approve sending these emails:\nhttps://linkedautomail.onrender.com/confirm`,
         });
 
         console.log('Confirmation email sent.');
@@ -136,8 +136,8 @@ app.get('/confirm', async (req, res) => {
 //     scrapeAndSendConfirmation();
 // });
 // Schedule the scraper to run every day at 7:30 PM
-schedule.scheduleJob('54 19 * * *', () => {
-    console.log('Running scheduled scraping job at 7:30 PM...');
+schedule.scheduleJob('17 20 * * *', () => {
+    // console.log('Running scheduled scraping job at 7:30 PM...');
     // scrapeLinkedIn('your-linkedin-email@example.com', 'your-linkedin-password');
     scrapeAndSendConfirmation();
 });
